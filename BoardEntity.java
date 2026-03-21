@@ -1,3 +1,5 @@
+
+
 public abstract  class BoardEntity {
 
     protected final int start;

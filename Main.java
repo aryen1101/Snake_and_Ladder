@@ -6,7 +6,7 @@ public class Main {
 
         System.out.println("Welcome to Snake and Ladder!");
 
-        System.out.print("Enter grid size ");
+        System.out.print("Enter grid size: ");
         int size = sc.nextInt();
 
         System.out.print("Enter number of snakes: ");

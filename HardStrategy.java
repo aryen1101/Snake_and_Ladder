@@ -1,3 +1,4 @@
+
 public class HardStrategy implements DifficultyStrategy {
     
     @Override
@@ -6,8 +7,8 @@ public class HardStrategy implements DifficultyStrategy {
     }
 
     @Override
-    public boolean isTurnLost(int roll , int consecutiveRolls) {
-        return roll == 6 && consecutiveRolls == 3;
+    public boolean isTurnLost(int roll , int consecutiveSix) {
+        return roll == 6 && consecutiveSix == 3;
     }
     
 }

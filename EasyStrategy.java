@@ -1,4 +1,5 @@
-class EasyStrategy implements DifficultyStrategy {
+
+public class EasyStrategy implements DifficultyStrategy {
 
     @Override
     public boolean getExtraTurn(int roll) {
@@ -6,7 +7,7 @@ class EasyStrategy implements DifficultyStrategy {
     }
 
     @Override
-    public boolean isTurnLost(int roll , int consecutiveRolls) {
+    public boolean isTurnLost(int roll , int consecutiveSix) {
         return false;
     }
 }

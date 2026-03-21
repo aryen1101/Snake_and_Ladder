@@ -1,4 +1,5 @@
 
+
 import java.util.*;
 
 public class BoardFactory {
@@ -6,6 +7,16 @@ public class BoardFactory {
     public static Board createBoard(int size, int snakeCount, int ladderCount) {
         int totalSquare = size * size;
         Map<Integer, BoardEntity> entities = new HashMap<>();
+
+        int maxAllowedEntities = totalSquare / 4; 
+        
+        if ((snakeCount + ladderCount) > maxAllowedEntities) {
+            throw new IllegalArgumentException(
+                "The board is too small! A " + totalSquare + 
+                "-square board can safely hold a maximum of " + maxAllowedEntities + 
+                " total snakes and ladders."
+            );
+        }
 
         generateEntities(entities, totalSquare, snakeCount, ladderCount);
 
