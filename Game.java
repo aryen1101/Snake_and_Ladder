@@ -10,14 +10,14 @@ public class Game {
     private final Queue<Player> players;
     private final Dice dice;
     private final DifficultyStrategy strategy;
-    private final Scanner scanner;
+    private final Scanner sc;
 
-    public Game(Board board, Dice dice, List<Player> playersList, DifficultyStrategy strategy) {
+    public Game(Board board, Dice dice, List<Player> playersList, DifficultyStrategy strategy , Scanner sc) {
         this.board = board;
         this.dice = dice;
         this.players = new LinkedList<>(playersList);
         this.strategy = strategy;
-        this.scanner = new Scanner(System.in);
+        this.sc = sc;
     }
 
     public void play() {
@@ -30,32 +30,30 @@ public class Game {
 
             int consecutiveSix = 0;
             boolean isNextTurn = true;
-
+            
             int startPosition = currPlayer.getPosition();
 
             while (isNextTurn && !won) {
-
                 System.out.print("Press [ENTER] to roll the dice...");
-                scanner.nextLine();
+                sc.nextLine();
 
                 int roll = dice.roll();
                 System.out.println("It is a " + roll);
 
-                if (roll == 6) {
+                if (strategy.getExtraTurn(roll)) {
                     consecutiveSix++;
-                    if (consecutiveSix == 3) {
-                        if (strategy.isTurnLost()) {
-                            System.out.println(" Turn Lost because of 3 six.");
-                            currPlayer.setPosition(startPosition);
-                            // consecutiveSix = 0;
-                            break;
-                        } else {
-                            consecutiveSix = 0;
-                        }
+                    
+                    if (strategy.isTurnLost(roll, consecutiveSix)) {
+                        System.out.println("Turn lost because of 3 six.");
+                        currPlayer.setPosition(startPosition); 
+                        break;
+                    } else {
+                        System.out.println("Rolled a 6 , Got one more turn");
+                        isNextTurn = true; 
                     }
-
                 } else {
                     consecutiveSix = 0;
+                    isNextTurn = false;
                 }
 
                 int finalPosition = board.resolveMove(currPlayer.getPosition(), roll);
@@ -63,18 +61,12 @@ public class Game {
                 System.out.println(currPlayer.getName() + " is moved to " + currPlayer.getPosition());
 
                 if (board.isWinning(currPlayer.getPosition())) {
-                    System.out.println(currPlayer.getName() + " has won the game.");
+                    System.out.println(currPlayer.getName() + " has won the game!");
                     won = true;
                     break;
                 }
-
-                if (roll != 6) {
-                    isNextTurn = false;
-                }
-                if (isNextTurn) {
-                    System.out.println("Rolled a 6! Next turn is yours");
-                }
             }
+            
             if (!won) {
                 players.add(currPlayer);
             }

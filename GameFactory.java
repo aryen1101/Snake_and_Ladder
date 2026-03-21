@@ -1,10 +1,11 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class GameFactory {
 
-    public static Game createGame(int size , int snakeCount , int ladderCount , int playerCount , String difficulty){
+    public static Game createGame(int size , int snakeCount , int ladderCount , int playerCount , String difficulty , Scanner sc){
 
         Board board = BoardFactory.createBoard(size, snakeCount, ladderCount);
         Dice dice = DiceFactory.createDice();
@@ -22,7 +23,7 @@ public class GameFactory {
             strategy = new EasyStrategy();
         }
 
-        return new Game(board, dice, players, strategy);
+        return new Game(board, dice, players, strategy , sc);
     }
     
 }

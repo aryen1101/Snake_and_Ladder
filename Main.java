@@ -1,12 +1,28 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        int size = 10;     
-        int snakeCount = 6;    
-        int ladderCount = 6;  
-        String difficulty = "easy"; 
-        int playerCount = 3;  
+        Scanner sc = new Scanner(System.in);
 
-        System.out.println("Starting Snake and Ladder Game");
+        System.out.println("Welcome to Snake and Ladder!");
+
+        System.out.print("Enter grid size ");
+        int size = sc.nextInt();
+
+        System.out.print("Enter number of snakes: ");
+        int snakeCount = sc.nextInt();
+
+        System.out.print("Enter number of ladders: ");
+        int ladderCount = sc.nextInt();
+
+        System.out.print("Enter number of players: ");
+        int playerCount = sc.nextInt();
+
+        System.out.print("Enter difficulty (easy/hard): ");
+        String difficulty = sc.next();
+
+        sc.nextLine();
+
         System.out.println("Grid Size: " + size + "x" + size + " (" + (size * size) + " squares)");
         System.out.println("Difficulty: " + difficulty.toUpperCase());
         System.out.println("Total Players: " + playerCount);
@@ -16,9 +32,11 @@ public class Main {
             snakeCount, 
             ladderCount, 
             playerCount,
-            difficulty
+            difficulty,
+            sc
         );
 
         game.play();
+        
     }
 }

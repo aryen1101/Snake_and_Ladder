@@ -1,4 +1,5 @@
 public interface DifficultyStrategy {
     
-    boolean isTurnLost();    
+    boolean getExtraTurn(int roll);
+    boolean isTurnLost(int roll , int consecutiveRolls);    
 }

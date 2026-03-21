@@ -39,7 +39,7 @@ public class BoardFactory {
                 int start = random.nextInt(totalSquare - 2) + 2;
                 int end = random.nextInt(totalSquare - start) + start + 1;
                 if (!usedSquares.contains(start) && !usedSquares.contains(end)) {
-                    entities.put(start, new Snake(start, end));
+                    entities.put(start, new Ladder(start, end));
                     usedSquares.add(start);
                     usedSquares.add(end);
                     break;
